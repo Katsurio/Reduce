@@ -72,8 +72,12 @@ function addKeyAndValue(arr, key, value) {
   }, [])
 }
 // console.log(addKeyAndValue(arr, 'title', 'Instructor'))
+
 /*
-Write a function called partition which accepts an array and a callback and returns an array with two arrays inside of it. The partition function should run the callback function on each value in the array and if the result of the callback function at that specific value is true, the value should be placed in the first subarray. If the result of the callback function at that specific value is false, the value should be placed in the second subarray. 
+Write a function called partition which accepts an array and a callback and returns an array with two arrays inside of it. 
+The partition function should run the callback function on each value in the array 
+and if the result of the callback function at that specific value is true, the value should be placed in the first subarray. 
+If the result of the callback function at that specific value is false, the value should be placed in the second subarray. 
 
 Examples:
     
@@ -94,4 +98,20 @@ Examples:
     partition(names, isLongerThanThreeCharacters) // [['Elie', 'Colt', 'Matt'], ['Tim']]
 */
 
-function partition(arr, callback) {}
+function isEven(val) {
+  return val % 2 === 0
+}
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8]
+
+partition(arr, isEven) // [[2,4,6,8], [1,3,5,7]];
+
+function partition(arr, callback) {
+  return arr.reduce(
+    (accum, nextVal) => {
+      callback(nextVal) ? accum[0].push(nextVal) : accum[1].push(nextVal)
+      return accum
+    },
+    [[], []],
+  )
+}
